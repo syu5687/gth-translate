@@ -1,10 +1,17 @@
 {
   "name": "gth-translate",
-  "version": "1.0.0",
-  "main": "server.js",
+  "private": true,
   "type": "module",
+  "scripts": {
+	"build": "tsc",
+	"start": "node dist/server.js",
+	"dev": "tsx watch server.ts"
+  },
   "dependencies": {
-	"express": "^4.19.2",
-	"node-fetch": "^3.3.2"
+	"express": "^4.19.2"
+  },
+  "devDependencies": {
+	"tsx": "^4.16.2",
+	"typescript": "^5.5.4"
   }
 }
