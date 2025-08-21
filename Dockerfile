@@ -25,3 +25,15 @@ COPY . /var/www/html
 # パーミッション
 RUN chown -R www-data:www-data /var/www/html \
  && chmod -R 755 /var/www/html
+ 
+ 
+ FROM node:20
+ 
+ WORKDIR /app
+ 
+ COPY package*.json ./
+ RUN npm install
+ 
+ COPY . .
+ 
+ CMD ["npm", "start"]
