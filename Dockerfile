@@ -1,4 +1,4 @@
-# gth-translate/Dockerfile.
+# gth-translate/Dockerfile.s
 FROM node:20-alpine
 
 WORKDIR /app
