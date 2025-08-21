@@ -26,27 +26,17 @@ COPY . /var/www/html
 RUN chown -R www-data:www-data /var/www/html \
  && chmod -R 755 /var/www/html
  
+ # Node で API を動かす
+ FROM node:20-alpine
  
-# Node 公式ランタイム（小さめ）
- FROM node:20-slim
- 
- # 必要ツール（fetch/ssl等は標準でOK）
  WORKDIR /app
  
- # 依存
- COPY package.json package-lock.json* ./
- RUN npm ci --omit=dev
+ COPY package*.json ./
+ RUN npm ci --only=production
  
- # ソース
- COPY tsconfig.json ./
- COPY server.ts ./
+ COPY server.js ./
  
- # ビルドして本番用に差し替え
- RUN npm run build && \
-	 npm prune --omit=dev
- 
- # Cloud Run が渡す $PORT を使う
  ENV PORT=8080
  EXPOSE 8080
  
- CMD ["node", "dist/server.js"]
+ CMD ["node", "server.js"]
